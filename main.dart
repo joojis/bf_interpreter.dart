@@ -91,18 +91,14 @@ class Program {
           memory[memoryIndex] -= instruction.data;
           break;
         case InstructionType.JumpBegin:
-          if (memoryIndex < 0) {
-            throw new UnimplementedError();
-          }
-          if (memory[memoryIndex] == 0) {
+          // FIXME: Currently, negative memory index could be treated as value zero.
+          if (memoryIndex < 0 || memory[memoryIndex] == 0) {
             instructionIndex = instruction.data;
           }
           break;
         case InstructionType.JumpEnd:
-          if (memoryIndex < 0) {
-            throw new UnimplementedError();
-          }
-          if (memory[memoryIndex] != 0) {
+          // FIXME: Currently, negative memory index could be treated as value zero.
+          if (memoryIndex >= 0 && memory[memoryIndex] != 0) {
             instructionIndex = instruction.data;
           }
           break;
