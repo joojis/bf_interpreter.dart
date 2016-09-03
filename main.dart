@@ -24,9 +24,6 @@ class ProgramInstruction {
   ProgramInstruction (String operator, this.data) {
     type = InstructionType.values[BFOperators.indexOf(operator)];
   }
-  setData (data) {
-    this.data = data;
-  }
 }
 
 class Program {
@@ -49,7 +46,7 @@ class Program {
           beginIndexStack.removeLast();
 
           instructions[i] = new ProgramInstruction(str[i], matchIndex);
-          instructions[matchIndex].setData(i);
+          instructions[matchIndex].data = i;
           break;
         default:
           instructions[i] = new ProgramInstruction(str[i], 1);
