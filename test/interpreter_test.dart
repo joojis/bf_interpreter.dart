@@ -19,5 +19,6 @@ void main() {
     await testBF('my_first_name');
     await testBF('hello_world_1');
     await testBF('hello_world_2');
+    await testBF('big_array');
   });
 }
