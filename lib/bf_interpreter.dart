@@ -26,6 +26,21 @@ class ProgramInstruction {
   }
 }
 
+class BFTextLoader {
+  load (String filepath) async {
+    var stream = new File(filepath).openRead();
+    StringBuffer buf = new StringBuffer();
+    await for (var data in stream) {
+      for (var charCode in data) {
+        if (isCodeUnitOperator(charCode)) {
+          buf.writeCharCode(charCode);
+        }
+      }
+    }
+    return buf.toString();
+  }
+}
+
 class Program {
   List<ProgramInstruction> instructions;
   Program (String str) {
