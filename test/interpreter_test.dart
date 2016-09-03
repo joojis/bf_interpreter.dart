@@ -20,5 +20,6 @@ void main() {
     await testBF('hello_world_1');
     await testBF('hello_world_2');
     await testBF('big_array');
+    await testBF('obscure');
   });
 }
