@@ -17,5 +17,6 @@ testBF(str) async {
 void main() {
   test("interpreter should be able to run BF codes.", () async {
     await testBF('my_first_name');
+    await testBF('hello_world_1');
   });
 }
