@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'dart:collection';
 import 'dart:async';
 
@@ -23,21 +22,6 @@ class ProgramInstruction {
   int data = null;
   ProgramInstruction (String operator, this.data) {
     type = InstructionType.values[BFOperators.indexOf(operator)];
-  }
-}
-
-class BFTextLoader {
-  load (String filepath) async {
-    var stream = new File(filepath).openRead();
-    StringBuffer buf = new StringBuffer();
-    await for (var data in stream) {
-      for (var charCode in data) {
-        if (isCodeUnitOperator(charCode)) {
-          buf.writeCharCode(charCode);
-        }
-      }
-    }
-    return buf.toString();
   }
 }
 

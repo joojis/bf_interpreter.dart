@@ -2,6 +2,21 @@ import "package:bf_interpreter/bf_interpreter.dart";
 import "package:test/test.dart";
 import "dart:io";
 
+class BFTextLoader {
+  load (String filepath) async {
+    var stream = new File(filepath).openRead();
+    StringBuffer buf = new StringBuffer();
+    await for (var data in stream) {
+      for (var charCode in data) {
+        if (isCodeUnitOperator(charCode)) {
+          buf.writeCharCode(charCode);
+        }
+      }
+    }
+    return buf.toString();
+  }
+}
+
 testBF(str) async {
   final pathPrefix = 'test/bf_testcases/';
   var loader = new BFTextLoader();
