@@ -4,5 +4,6 @@ author: JinGyeong Jeong <jjgjoojis@gmail.com>
 homepage: https://github.com/joojis/bf_interpreter.dart
 dependencies:
   test:
+  browser: any
 environment:
   sdk: ">=1.18.1"
