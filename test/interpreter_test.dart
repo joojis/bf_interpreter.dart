@@ -1,6 +1,7 @@
+import "dart:io";
+
 import "package:bf_interpreter/bf_interpreter.dart";
 import "package:test/test.dart";
-import "dart:io";
 
 class BFTextLoader {
   load (String filepath) async {
