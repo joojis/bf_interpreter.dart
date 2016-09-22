@@ -27,9 +27,11 @@ const ascii_min = 0, ascii_max = 127;
 class Program {
   List<ProgramInstruction> instructions;
   HashSet<String> logs;
+  StreamController<String> logStream;
 
   Program(String str) {
     logs = new HashSet<String>();
+    logStream = new StreamController<String>();
     strToInst(str);
   }
   String _stripNonOperatorCharacters(String str) {
@@ -68,13 +70,16 @@ class Program {
     }
   }
 
+  getLogStream() {
+    return logStream.stream;
+  }
+
   _log(String str) {
     if (logs.contains(str)) {
       return;
     }
     logs.add(str);
-    // TODO: Instead of print, use stream.
-    print("Log: ${str}");
+    logStream.add(str);
   }
 
   _error(String msg) {
