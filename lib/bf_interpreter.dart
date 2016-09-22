@@ -3,8 +3,10 @@ import 'dart:collection';
 
 const BFOperators = '+-><[],.';
 
-isEveryCodeUnitOperator(String str) => str.codeUnits.every((code) => isCodeUnitOperator(code));
-isCodeUnitOperator(int charCode) => BFOperators.codeUnits.any((code) => code == charCode);
+isEveryCodeUnitOperator(String str) =>
+    str.codeUnits.every((code) => isCodeUnitOperator(code));
+isCodeUnitOperator(int charCode) =>
+    BFOperators.codeUnits.any((code) => code == charCode);
 
 enum InstructionType {
   IncrementValue,
@@ -20,7 +22,7 @@ enum InstructionType {
 class ProgramInstruction {
   InstructionType type;
   int data = null;
-  ProgramInstruction (String operator, this.data) {
+  ProgramInstruction(String operator, this.data) {
     type = InstructionType.values[BFOperators.indexOf(operator)];
   }
 }
@@ -31,12 +33,12 @@ class Program {
   List<ProgramInstruction> instructions;
   HashSet<String> logs;
 
-  Program (String str) {
+  Program(String str) {
     assert(isEveryCodeUnitOperator(str));
     logs = new HashSet<String>();
     strToInst(str);
   }
-  strToInst (String str) {
+  strToInst(String str) {
     var beginIndexStack = new Queue<int>();
     instructions = new List<ProgramInstruction>(str.length);
     for (int i = 0; i < str.length; i++) {
@@ -46,7 +48,8 @@ class Program {
           instructions[i] = new ProgramInstruction(str[i], null);
           break;
         case ']':
-          final matchIndex = beginIndexStack.isNotEmpty ? beginIndexStack.last : null;
+          final matchIndex =
+              beginIndexStack.isNotEmpty ? beginIndexStack.last : null;
 
           instructions[i] = new ProgramInstruction(str[i], matchIndex);
           if (matchIndex == null) {
@@ -66,7 +69,7 @@ class Program {
     }
   }
 
-  _log (String str) {
+  _log(String str) {
     if (logs.contains(str)) {
       return;
     }
@@ -75,12 +78,12 @@ class Program {
     print("Log: ${str}");
   }
 
-  _error (String msg) {
+  _error(String msg) {
     _log("ERROR: ${msg}");
     throw new Error();
   }
 
-  Stream run () async* {
+  Stream run() async* {
     var memory = new List<int>()
       ..length = 1
       ..[0] = 0;
@@ -101,7 +104,8 @@ class Program {
         case InstructionType.DecrementPointer:
           memoryIndex -= instruction.data;
           if (memoryIndex < 0) {
-            _log("The pointer has been moved to non-positive which is not supported. Any reference will occur an error in current implementation.");
+            _log(
+                "The pointer has been moved to non-positive which is not supported. Any reference will occur an error in current implementation.");
           }
           break;
         case InstructionType.IncrementValue:
@@ -142,10 +146,12 @@ class Program {
           if (memoryIndex < 0) {
             _error("Referencing non-positive pointer is not supported.");
           }
-          if (ascii_min <= memory[memoryIndex] && memory[memoryIndex] <= ascii_max) {
+          if (ascii_min <= memory[memoryIndex] &&
+              memory[memoryIndex] <= ascii_max) {
             yield memory[memoryIndex];
           } else {
-            _error("Print error: ${memory[memoryIndex]} is not in range [$ascii_min, $ascii_max].");
+            _error(
+                "Print error: ${memory[memoryIndex]} is not in range [$ascii_min, $ascii_max].");
           }
           break;
         default:
@@ -159,11 +165,12 @@ class Program {
   // Test all bytes is in ASCII range.
   _inspectMemory(List<int> memory) {
     int count = 0;
-    for (int i=0; i<memory.length; i++) {
+    for (int i = 0; i < memory.length; i++) {
       if (memory[i] < ascii_min || ascii_max < memory[i]) {
         count++;
       }
     }
-    _log("Memory Inspection Result - Memory bytes in use: ${memory.length}, Number of non-ascii value in memory: ${count}");
+    _log(
+        "Memory Inspection Result - Memory bytes in use: ${memory.length}, Number of non-ascii value in memory: ${count}");
   }
 }
