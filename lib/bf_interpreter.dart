@@ -25,6 +25,8 @@ class ProgramInstruction {
   }
 }
 
+const ascii_min = 0, ascii_max = 127;
+
 class Program {
   List<ProgramInstruction> instructions;
   HashSet<String> logs;
@@ -140,7 +142,6 @@ class Program {
           if (memoryIndex < 0) {
             _error("Referencing non-positive pointer is not supported.");
           }
-          const ascii_min = 0, ascii_max = 127;
           if (ascii_min <= memory[memoryIndex] && memory[memoryIndex] <= ascii_max) {
             yield memory[memoryIndex];
           } else {
@@ -152,5 +153,17 @@ class Program {
       }
       instructionIndex++;
     }
+    _inspectMemory(memory);
+  }
+
+  // Test all bytes is in ASCII range.
+  _inspectMemory(List<int> memory) {
+    int count = 0;
+    for (int i=0; i<memory.length; i++) {
+      if (memory[i] < ascii_min || ascii_max < memory[i]) {
+        count++;
+      }
+    }
+    _log("Memory Inspection Result - Memory bytes in use: ${memory.length}, Number of non-ascii value in memory: ${count}");
   }
 }
