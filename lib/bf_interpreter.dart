@@ -162,7 +162,7 @@ class Program {
     _inspectMemory(memory);
   }
 
-  // Test all bytes is in ASCII range.
+  // Test all bytes is in ASCII range due to HW requirement.
   _inspectMemory(List<int> memory) {
     int count = 0;
     for (int i = 0; i < memory.length; i++) {
