@@ -8,9 +8,7 @@ class BFTextLoader {
     StringBuffer buf = new StringBuffer();
     await for (var data in stream) {
       for (var charCode in data) {
-        if (isCodeUnitOperator(charCode)) {
-          buf.writeCharCode(charCode);
-        }
+        buf.writeCharCode(charCode);
       }
     }
     return buf.toString();

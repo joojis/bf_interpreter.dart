@@ -3,11 +3,6 @@ import 'dart:collection';
 
 const BFOperators = '+-><[],.';
 
-isEveryCodeUnitOperator(String str) =>
-    str.codeUnits.every((code) => isCodeUnitOperator(code));
-isCodeUnitOperator(int charCode) =>
-    BFOperators.codeUnits.any((code) => code == charCode);
-
 enum InstructionType {
   IncrementValue,
   DecrementValue,
@@ -34,11 +29,15 @@ class Program {
   HashSet<String> logs;
 
   Program(String str) {
-    assert(isEveryCodeUnitOperator(str));
     logs = new HashSet<String>();
     strToInst(str);
   }
+  String _stripNonOperatorCharacters(String str) {
+    final programCharactersWithEscape = r"+-<>.,[]".replaceAllMapped(new RegExp('.'), (match) => '\\${match.group(0)}');
+    return str.replaceAll(new RegExp('[^${programCharactersWithEscape}]'), '');
+  }
   strToInst(String str) {
+    str = _stripNonOperatorCharacters(str);
     var beginIndexStack = new Queue<int>();
     instructions = new List<ProgramInstruction>(str.length);
     for (int i = 0; i < str.length; i++) {
