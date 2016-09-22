@@ -27,8 +27,11 @@ class ProgramInstruction {
 
 class Program {
   List<ProgramInstruction> instructions;
+  HashSet<String> logs;
+
   Program (String str) {
     assert(isEveryCodeUnitOperator(str));
+    logs = new HashSet<String>();
     strToInst(str);
   }
   strToInst (String str) {
@@ -38,19 +41,41 @@ class Program {
       switch (str[i]) {
         case '[':
           beginIndexStack.addLast(i);
-          instructions[i] = new ProgramInstruction(str[i], 1);
+          instructions[i] = new ProgramInstruction(str[i], null);
           break;
         case ']':
           final matchIndex = beginIndexStack.isNotEmpty ? beginIndexStack.last : null;
-          beginIndexStack.removeLast();
 
           instructions[i] = new ProgramInstruction(str[i], matchIndex);
+          if (matchIndex == null) {
+            _log("There exists unmatched ']' operator.");
+            break;
+          }
           instructions[matchIndex].data = i;
+          beginIndexStack.removeLast();
           break;
         default:
           instructions[i] = new ProgramInstruction(str[i], 1);
       }
     }
+
+    if (beginIndexStack.length > 0) {
+      _log("There exists unmatched '[' operator.");
+    }
+  }
+
+  _log (String str) {
+    if (logs.contains(str)) {
+      return;
+    }
+    logs.add(str);
+    // TODO: Instead of print, use stream.
+    print("Log: ${str}");
+  }
+
+  _error (String msg) {
+    _log("ERROR: ${msg}");
+    throw new Error();
   }
 
   Stream run () async* {
@@ -89,12 +114,18 @@ class Program {
         case InstructionType.JumpBegin:
           // FIXME: Currently, negative memory index could be treated as value zero.
           if (memoryIndex < 0 || memory[memoryIndex] == 0) {
+            if (instruction.data == null) {
+              _error("Unmatched '[' cannot be evaluated.");
+            }
             instructionIndex = instruction.data;
           }
           break;
         case InstructionType.JumpEnd:
           // FIXME: Currently, negative memory index could be treated as value zero.
           if (memoryIndex >= 0 && memory[memoryIndex] != 0) {
+            if (instruction.data == null) {
+              _error("Unmatched ']' cannot be evaluated.");
+            }
             instructionIndex = instruction.data;
           }
           break;
