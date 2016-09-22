@@ -5,10 +5,10 @@ import "package:test/test.dart";
 
 class BFTextLoader {
   load (String filepath) async {
-    var stream = new File(filepath).openRead();
+    final stream = new File(filepath).openRead();
     StringBuffer buf = new StringBuffer();
-    await for (var data in stream) {
-      for (var charCode in data) {
+    await for (final data in stream) {
+      for (final charCode in data) {
         buf.writeCharCode(charCode);
       }
     }
@@ -18,11 +18,10 @@ class BFTextLoader {
 
 testBF(str) async {
   final pathPrefix = 'test/bf_testcases/';
-  var loader = new BFTextLoader();
-  var expected = new File('${pathPrefix + str}.expected').readAsStringSync() ;
-  var program = new Program(await loader.load('${pathPrefix + str}.bf'));
-  var buffer = new StringBuffer();
-  await for (var code in program.run()) {
+  final expected = new File('${pathPrefix + str}.expected').readAsStringSync() ;
+  final program = new Program(new File('${pathPrefix + str}.bf').readAsStringSync());
+  final buffer = new StringBuffer();
+  await for (final code in program.run()) {
     buffer.writeCharCode(code);
   }
   expect(buffer.toString(), equals(expected));
