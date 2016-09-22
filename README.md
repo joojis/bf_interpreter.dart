@@ -2,6 +2,12 @@ Brainfuck interpreter written in dartlang.
 
 ## HOW TO
 
+### Running BF file
+
+```shell
+$ dart bin/cli.dart <BF filepath, such as "test/bf_testcases/hello_world_1.bf">
+```
+
 ### Setting GitHub Pages content.
 
  - Running shell commands.
@@ -18,8 +24,3 @@ $ git push -f origin HEAD:gh-pages
 
  - Check website "https://\<username\>.github.io/\<project_name\>"
 
-### Running BF file (Currently not supported)
-
-```shell
-$ dart bin/cli.dart <BF filepath>
-```
