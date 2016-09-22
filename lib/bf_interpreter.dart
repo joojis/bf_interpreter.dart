@@ -98,22 +98,27 @@ class Program {
           break;
         case InstructionType.DecrementPointer:
           memoryIndex -= instruction.data;
+          if (memoryIndex < 0) {
+            _log("The pointer has been moved to non-positive which is not supported. Any reference will occur an error in current implementation.");
+          }
           break;
         case InstructionType.IncrementValue:
           if (memoryIndex < 0) {
-            throw new UnimplementedError();
+            _error("IncrementValue at non-positive pointer is not supported.");
           }
           memory[memoryIndex] += instruction.data;
           break;
         case InstructionType.DecrementValue:
           if (memoryIndex < 0) {
-            throw new UnimplementedError();
+            _error("DecrementValue at non-positive pointer is not supported.");
           }
           memory[memoryIndex] -= instruction.data;
           break;
         case InstructionType.JumpBegin:
-          // FIXME: Currently, negative memory index could be treated as value zero.
-          if (memoryIndex < 0 || memory[memoryIndex] == 0) {
+          if (memoryIndex < 0) {
+            _error("Referencing non-positive pointer is not supported.");
+          }
+          if (memory[memoryIndex] == 0) {
             if (instruction.data == null) {
               _error("Unmatched '[' cannot be evaluated.");
             }
@@ -121,8 +126,10 @@ class Program {
           }
           break;
         case InstructionType.JumpEnd:
-          // FIXME: Currently, negative memory index could be treated as value zero.
-          if (memoryIndex >= 0 && memory[memoryIndex] != 0) {
+          if (memoryIndex < 0) {
+            _error("Referencing non-positive pointer is not supported.");
+          }
+          if (memory[memoryIndex] != 0) {
             if (instruction.data == null) {
               _error("Unmatched ']' cannot be evaluated.");
             }
@@ -131,9 +138,14 @@ class Program {
           break;
         case InstructionType.PrintByte:
           if (memoryIndex < 0) {
-            throw new UnimplementedError();
+            _error("Referencing non-positive pointer is not supported.");
           }
-          yield memory[memoryIndex];
+          const ascii_min = 0, ascii_max = 127;
+          if (ascii_min <= memory[memoryIndex] && memory[memoryIndex] <= ascii_max) {
+            yield memory[memoryIndex];
+          } else {
+            _error("Print error: ${memory[memoryIndex]} is not in range [$ascii_min, $ascii_max].");
+          }
           break;
         default:
           throw new UnimplementedError();
