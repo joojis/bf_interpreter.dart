@@ -31,6 +31,7 @@ import 'package:bf_interpreter/bf_interpreter.dart';
           <label for="outputTextarea">Output</label>
           </h3>
           <textarea name="outputTextarea" [(ngModel)]="output" disabled rows=10></textarea>
+          <pre>{{outputHelpString}}</pre>
         </div>
         <div class="pure-u-1 pure-u-lg-1-24"></div>
         <div class="pure-u-1 pure-u-lg-5-24">
@@ -55,16 +56,21 @@ import 'package:bf_interpreter/bf_interpreter.dart';
 class ProgramComponent {
   String code = '';
   String output = '';
+  String outputHelpString = '';
   List<String> logs = [];
 
   void onClickExecute() async {
     final program = new Program(code);
+    outputHelpString = 'Program is running';
     try {
       output = '';
       await for (final ch in program.run()) {
         output += new String.fromCharCode(ch);
       }
+    } on Error {
+      outputHelpString = 'Program exited with an error.\n';
     } finally {
+      outputHelpString += 'Output length: ${output.length}\n';
       logs = [];
       await for (final log in program.getLogStream()) {
         logs.add(log);
