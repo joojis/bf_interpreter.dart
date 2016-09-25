@@ -20,7 +20,7 @@ import 'package:bf_interpreter/bf_interpreter.dart';
       <div class="pure-g">
         <div class="pure-u-1 pure-u-lg-4-24"></div>
         <div class="pure-u-1 pure-u-lg-16-24">
-          <button (click)="onClickExecute()">Execute</button>
+          <button class="pure-button pure-button-primary" (click)="onClickExecute()">Run</button>
         </div>
         <div class="pure-u-1 pure-u-lg-4-24"></div>
       </div>
