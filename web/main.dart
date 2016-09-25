@@ -8,16 +8,35 @@ import 'package:bf_interpreter/bf_interpreter.dart';
 @Component(
     selector: 'program',
     template: '''
-      <label for="codeTextarea">BF Code</label>
-      <textarea name="codeTextarea" [(ngModel)]="code"></textarea>
+      <div class="pure-g">
+        <div class="pure-u-1 pure-u-lg-4-24"></div>
+        <div class="pure-u-1 pure-u-lg-16-24">
+          <label for="codeTextarea">BF Code</label>
+          <textarea name="codeTextarea" [(ngModel)]="code"></textarea>
+        </div>
+        <div class="pure-u-1 pure-u-lg-4-24"></div>
+      </div>
 
-      <button (click)="onClickExecute()">Execute</button>
+      <div class="pure-g">
+        <div class="pure-u-1 pure-u-lg-4-24"></div>
+        <div class="pure-u-1 pure-u-lg-16-24">
+          <button (click)="onClickExecute()">Execute</button>
+        </div>
+        <div class="pure-u-1 pure-u-lg-4-24"></div>
+      </div>
 
-      <label for="outputTextarea">Runtime Output</label>
-      <textarea name="outputTextarea" [(ngModel)]="output"></textarea>
-
-      <label for="logTextarea">Program Log(including error)</label>
-      <textarea name="logTextarea" [(ngModel)]="log"></textarea>
+      <div class="pure-g">
+        <div class="pure-u-1 pure-u-lg-4-24"></div>
+        <div class="pure-u-1 pure-u-lg-8-24">
+          <label for="outputTextarea">Runtime Output</label>
+          <textarea name="outputTextarea" [(ngModel)]="output"></textarea>
+        </div>
+        <div class="pure-u-1 pure-u-lg-8-24">
+          <label for="logTextarea">Program Log(including error)</label>
+          <textarea name="logTextarea" [(ngModel)]="log"></textarea>
+        </div>
+        <div class="pure-u-1 pure-u-lg-4-24"></div>
+      </div>
     '''
 )
 class ProgramComponent {
