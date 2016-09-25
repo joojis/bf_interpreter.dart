@@ -9,36 +9,37 @@ import 'package:bf_interpreter/bf_interpreter.dart';
     selector: 'program',
     template: '''
       <div class="pure-g">
-        <div class="pure-u-1 pure-u-lg-4-24"></div>
-        <div class="pure-u-1 pure-u-lg-16-24">
+        <div class="pure-u-1 pure-u-lg-6-24"></div>
+        <div class="pure-u-1 pure-u-lg-11-24">
           <textarea name="codeTextarea" [(ngModel)]="code" rows=10 placeholder="BrainFuck Code Here"></textarea>
         </div>
-        <div class="pure-u-1 pure-u-lg-4-24"></div>
+        <div class="pure-u-1 pure-u-lg-7-24"></div>
       </div>
 
       <div class="pure-g">
-        <div class="pure-u-1 pure-u-lg-4-24"></div>
-        <div class="pure-u-1 pure-u-lg-16-24">
+        <div class="pure-u-1 pure-u-lg-6-24"></div>
+        <div class="pure-u-1 pure-u-lg-11-24">
           <button class="pure-button pure-button-primary" (click)="onClickExecute()">Run</button>
         </div>
-        <div class="pure-u-1 pure-u-lg-4-24"></div>
+        <div class="pure-u-1 pure-u-lg-7-24"></div>
       </div>
 
       <div class="pure-g">
-        <div class="pure-u-1 pure-u-lg-4-24"></div>
-        <div class="pure-u-1 pure-u-lg-8-24">
+        <div class="pure-u-1 pure-u-lg-6-24"></div>
+        <div class="pure-u-1 pure-u-lg-5-24">
           <h3>
           <label for="outputTextarea">Output</label>
           </h3>
           <textarea name="outputTextarea" [(ngModel)]="output" disabled rows=10></textarea>
         </div>
-        <div class="pure-u-1 pure-u-lg-8-24">
+        <div class="pure-u-1 pure-u-lg-1-24"></div>
+        <div class="pure-u-1 pure-u-lg-5-24">
           <h3>
           <label for="logTextarea">Log (including error)</label>
           </h3>
           <textarea name="logTextarea" [(ngModel)]="log" disabled rows=10></textarea>
         </div>
-        <div class="pure-u-1 pure-u-lg-4-24"></div>
+        <div class="pure-u-1 pure-u-lg-7-24"></div>
       </div>
     '''
 )
