@@ -12,7 +12,7 @@ import 'package:bf_interpreter/bf_interpreter.dart';
         <div class="pure-u-1 pure-u-lg-4-24"></div>
         <div class="pure-u-1 pure-u-lg-16-24">
           <label for="codeTextarea">BF Code</label>
-          <textarea name="codeTextarea" [(ngModel)]="code"></textarea>
+          <textarea name="codeTextarea" [(ngModel)]="code" rows=10 placeholder="BrainFuck Code Here"></textarea>
         </div>
         <div class="pure-u-1 pure-u-lg-4-24"></div>
       </div>
@@ -29,11 +29,11 @@ import 'package:bf_interpreter/bf_interpreter.dart';
         <div class="pure-u-1 pure-u-lg-4-24"></div>
         <div class="pure-u-1 pure-u-lg-8-24">
           <label for="outputTextarea">Runtime Output</label>
-          <textarea name="outputTextarea" [(ngModel)]="output"></textarea>
+          <textarea name="outputTextarea" [(ngModel)]="output" disabled rows=10></textarea>
         </div>
         <div class="pure-u-1 pure-u-lg-8-24">
           <label for="logTextarea">Program Log(including error)</label>
-          <textarea name="logTextarea" [(ngModel)]="log"></textarea>
+          <textarea name="logTextarea" [(ngModel)]="log" disabled rows=10></textarea>
         </div>
         <div class="pure-u-1 pure-u-lg-4-24"></div>
       </div>
