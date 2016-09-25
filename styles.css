@@ -1,0 +1,15 @@
+div.pure-g {
+  padding: 0%;
+}
+textarea {
+  width: calc(100% - 20px);
+  overflow: auto;
+  outline: 1px solid #cbcbcb;
+  padding: 10px;
+  margin: 0px;
+  border: 0px;
+
+}
+button {
+  width: 100%;
+}

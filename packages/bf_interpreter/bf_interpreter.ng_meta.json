@@ -1,0 +1,48 @@
+{
+  "ngDeps": null,
+  "type": {
+    "BFOperators": {
+      "class": "Identifier",
+      "name": "BFOperators",
+      "moduleUrl": "asset:bf_interpreter/lib/bf_interpreter.dart",
+      "prefix": null,
+      "value": null
+    },
+    "InstructionType": {
+      "class": "Identifier",
+      "name": "InstructionType",
+      "moduleUrl": "asset:bf_interpreter/lib/bf_interpreter.dart",
+      "prefix": null,
+      "value": null
+    },
+    "ascii_min": {
+      "class": "Identifier",
+      "name": "ascii_min",
+      "moduleUrl": "asset:bf_interpreter/lib/bf_interpreter.dart",
+      "prefix": null,
+      "value": null
+    },
+    "ascii_max": {
+      "class": "Identifier",
+      "name": "ascii_max",
+      "moduleUrl": "asset:bf_interpreter/lib/bf_interpreter.dart",
+      "prefix": null,
+      "value": null
+    },
+    "ProgramInstruction": {
+      "class": "Identifier",
+      "name": "ProgramInstruction",
+      "moduleUrl": "asset:bf_interpreter/lib/bf_interpreter.dart",
+      "prefix": null,
+      "value": null
+    },
+    "Program": {
+      "class": "Identifier",
+      "name": "Program",
+      "moduleUrl": "asset:bf_interpreter/lib/bf_interpreter.dart",
+      "prefix": null,
+      "value": null
+    }
+  },
+  "alias": {}
+}
