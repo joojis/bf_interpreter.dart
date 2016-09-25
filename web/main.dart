@@ -11,7 +11,12 @@ import 'package:bf_interpreter/bf_interpreter.dart';
       <div class="pure-g">
         <div class="pure-u-1 pure-u-lg-6-24"></div>
         <div class="pure-u-1 pure-u-lg-11-24">
-          <textarea name="codeTextarea" [(ngModel)]="code" rows=10 placeholder="BrainFuck Code Here"></textarea>
+          <textarea
+            name="codeTextarea"
+            [(ngModel)]="code"
+            (keydown.control.enter)="onCtrlEnter()"
+            rows=10
+            placeholder="BrainFuck Code Here"></textarea>
         </div>
         <div class="pure-u-1 pure-u-lg-7-24"></div>
       </div>
@@ -19,7 +24,7 @@ import 'package:bf_interpreter/bf_interpreter.dart';
       <div class="pure-g">
         <div class="pure-u-1 pure-u-lg-6-24"></div>
         <div class="pure-u-1 pure-u-lg-11-24">
-          <button class="pure-button pure-button-primary" (click)="onClickExecute()">Run</button>
+          <button class="pure-button pure-button-primary" (click)="onClickExecute()">Run (Control+Enter)</button>
         </div>
         <div class="pure-u-1 pure-u-lg-7-24"></div>
       </div>
@@ -59,7 +64,15 @@ class ProgramComponent {
   String outputHelpString = '';
   List<String> logs = [];
 
-  void onClickExecute() async {
+  void onCtrlEnter() {
+    run();
+  }
+
+  void onClickExecute() {
+    run();
+  }
+
+  void run() async {
     final program = new Program(code);
     outputHelpString = '';
     try {
