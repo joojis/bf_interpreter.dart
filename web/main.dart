@@ -37,7 +37,16 @@ import 'package:bf_interpreter/bf_interpreter.dart';
           <h3>
           <label for="logTextarea">Log (including error)</label>
           </h3>
-          <textarea name="logTextarea" [(ngModel)]="log" disabled rows=10></textarea>
+          <table class="pure-table pure-table-horizontal">
+            <tbody>
+              <tr *ngIf="logs.length == 0">
+                <td>The logs will be appeared here after running program.</td>
+              </tr>
+              <tr *ngFor="let log of logs">
+                <td>{{log}}</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
         <div class="pure-u-1 pure-u-lg-7-24"></div>
       </div>
@@ -46,7 +55,7 @@ import 'package:bf_interpreter/bf_interpreter.dart';
 class ProgramComponent {
   String code = '';
   String output = '';
-  String log = '';
+  List<String> logs = [];
 
   void onClickExecute() async {
     final program = new Program(code);
@@ -56,9 +65,9 @@ class ProgramComponent {
         output += new String.fromCharCode(ch);
       }
     } finally {
-      log = '';
-      await for (final line in program.getLogStream()) {
-        log += line + '\n';
+      logs = [];
+      await for (final log in program.getLogStream()) {
+        logs.add(log);
       }
     }
   }
