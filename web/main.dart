@@ -51,6 +51,11 @@ import 'package:bf_interpreter/bf_interpreter.dart';
         </div>
         <div class="pure-u-1 pure-u-lg-1-24"></div>
       </div>
+      <footer>
+        <center>
+          <a href="https://github.com/joojis/bf_interpreter.dart">View on GitHub</a> authored by (Jeong Jin Gyeong)
+        </center>
+      </footer>
     '''
 )
 class ProgramComponent {
