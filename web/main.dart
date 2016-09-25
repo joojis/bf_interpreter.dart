@@ -61,14 +61,14 @@ class ProgramComponent {
 
   void onClickExecute() async {
     final program = new Program(code);
-    outputHelpString = 'Program is running';
+    outputHelpString = '';
     try {
       output = '';
       await for (final ch in program.run()) {
         output += new String.fromCharCode(ch);
       }
     } on Error {
-      outputHelpString = 'Program exited with an error.\n';
+      outputHelpString += 'Program exited with an error.\n';
     } finally {
       outputHelpString += 'Output length: ${output.length}\n';
       logs = [];
