@@ -4,7 +4,7 @@ div.pure-g {
 textarea {
   width: calc(100% - 20px);
   overflow: auto;
-  outline: 1px solid black;
+  outline: 1px solid #cbcbcb;
   padding: 10px;
   margin: 0px;
   border: 0px;
